@@ -1,0 +1,42 @@
+{
+  "expo": {
+    "name": "NexPrint",
+    "slug": "nexprint",
+    "version": "2.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "automatic",
+    "splash": {
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#2563EB"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.nexprint.app"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#2563EB"
+      },
+      "package": "com.nexprint.app"
+    },
+    "plugins": [
+      "expo-router"
+    ],
+    "scheme": "nexprint",
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "aa224fa3-c4e1-4106-8ae5-8a2c4a2c6b6d"
+      }
+    },
+    "owner": "cmmanikandan"
+  }
+}

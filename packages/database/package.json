@@ -1,0 +1,8 @@
+{
+  "name": "@nexprint/database",
+  "version": "1.0.0",
+  "description": "NexPrint database schema and migrations",
+  "scripts": {
+    "migrate": "supabase db push"
+  }
+}

@@ -1,0 +1,21 @@
+{
+    "name": "NexPrint Admin",
+    "short_name": "NP Admin",
+    "description": "Manage Print Shop Operations",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#020617",
+    "theme_color": "#2563EB",
+    "icons": [
+        {
+            "src": "/logo.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        },
+        {
+            "src": "/favicon.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        }
+    ]
+}

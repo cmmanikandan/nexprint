@@ -1,0 +1,42 @@
+{
+  "name": "nexprint-2.0",
+  "version": "2.0.0",
+  "description": "Full-stack cloud printing platform - NexPrint 2.0",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "mobile": "cd apps/mobile && npm run start",
+    "delivery": "cd apps/delivery-partner && npm run start",
+    "admin:shop": "cd apps/print-shop-admin && npm run dev",
+    "admin:system": "cd apps/admin-dashboard && npm run dev",
+    "user:web": "cd apps/user-web && npm run dev",
+    "db:migrate": "cd packages/database && npm run migrate"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "overrides": {
+    "node-releases": "^2.0.19",
+    "browserslist": "^4.21.0",
+    "expo-font": "11.10.3",
+    "expo-linking": "6.2.2",
+    "@expo/config-plugins": "7.9.2",
+    "metro": "0.80.12",
+    "metro-resolver": "0.80.12",
+    "metro-config": "0.80.12",
+    "@supabase/supabase-js": "2.39.0"
+  },
+  "dependencies": {
+    "@expo/config-plugins": "7.9.2",
+    "expo-constants": "15.4.6",
+    "expo-font": "11.10.3",
+    "expo-linking": "6.2.2",
+    "metro": "0.80.12",
+    "metro-config": "0.80.12",
+    "metro-resolver": "0.80.12",
+    "nodemailer": "^8.0.1"
+  }
+}
