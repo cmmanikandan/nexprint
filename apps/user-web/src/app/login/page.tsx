@@ -10,9 +10,14 @@ import {
 import { supabase } from '@/lib/supabase';
 
 const RELAY_ROLES = new Set(['admin', 'shop_owner', 'staff']);
+const ADMIN_PORTAL_BASE = (process.env.NEXT_PUBLIC_PRINT_SHOP_ADMIN_URL || '').replace(/\/$/, '');
 
 async function redirectWithRelay(role: string) {
-    // Single-domain mode: keep all roles on this deployed app.
+    if (ADMIN_PORTAL_BASE) {
+        window.location.href = `${ADMIN_PORTAL_BASE}/`;
+        return;
+    }
+    // Fallback: keep users inside current app when external portal URL is not configured.
     window.location.href = '/dashboard';
 }
 

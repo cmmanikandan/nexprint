@@ -5,11 +5,16 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 
 const RELAY_ROLES = new Set(['admin', 'shop_owner', 'staff']);
+const ADMIN_PORTAL_BASE = (process.env.NEXT_PUBLIC_PRINT_SHOP_ADMIN_URL || '').replace(/\/$/, '');
 
 /**
  * Single-domain mode for deployments.
  */
 async function relayToAdmin(role: string) {
+    if (ADMIN_PORTAL_BASE) {
+        window.location.href = `${ADMIN_PORTAL_BASE}/`;
+        return;
+    }
     window.location.href = '/dashboard';
 }
 
