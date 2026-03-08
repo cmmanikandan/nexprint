@@ -61,7 +61,7 @@ export default function SuperAdminLayout({ children }: { children: React.ReactNo
 
     const handleLogout = async () => {
         await supabase.auth.signOut();
-        window.location.href = 'http://localhost:3003/logout';
+        window.location.href = '/';
     };
 
     return (

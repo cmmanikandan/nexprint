@@ -4,23 +4,13 @@ import { useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabase';
 
-const ADMIN_URL = 'http://localhost:3001';
 const RELAY_ROLES = new Set(['admin', 'shop_owner', 'staff']);
 
 /**
- * Redirects admin/shop roles via token relay to port 3001.
- * Supabase localStorage is scoped per origin (port), so we
- * can't just redirect — we must pass the tokens explicitly.
+ * Single-domain mode for deployments.
  */
 async function relayToAdmin(role: string) {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) throw new Error('No session found.');
-
-    const relay = new URL(`${ADMIN_URL}/auth/relay`);
-    relay.searchParams.set('access_token', session.access_token);
-    relay.searchParams.set('refresh_token', session.refresh_token);
-    relay.searchParams.set('role', role);
-    window.location.href = relay.toString();
+    window.location.href = '/dashboard';
 }
 
 export default function CallbackClientPage() {
@@ -46,7 +36,7 @@ export default function CallbackClientPage() {
 
                 if (!role) { router.replace('/auth/auth-code-error'); return; }
 
-                // Admin / shop — relay session tokens to port 3001
+                // Admin / shop / staff in single-domain mode
                 if (RELAY_ROLES.has(role)) {
                     await relayToAdmin(role);
                     return;

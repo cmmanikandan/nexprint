@@ -150,7 +150,7 @@ export default function AuthRelay() {
                     </button>
 
                     <a
-                        href="http://localhost:3003/login"
+                        href="/"
                         className="flex items-center justify-center gap-2 w-full py-4 bg-white border border-slate-200 text-slate-400 text-[10px] font-black uppercase tracking-widest rounded-2xl hover:bg-slate-50 transition-all"
                     >
                         <XCircle size={14} />

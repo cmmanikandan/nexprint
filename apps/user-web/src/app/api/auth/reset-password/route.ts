@@ -30,10 +30,7 @@ export async function POST(req: Request) {
             type: 'recovery',
             email: normalizedEmail,
             options: {
-                // If they have a custom set-password page on 3003, use it.
-                // Otherwise, cross-port to 3001 if it's an admin.
-                // But for now, let's assume they want a page on 3003.
-                redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3003'}/auth/reset-password`
+                redirectTo: `${process.env.NEXT_PUBLIC_SITE_URL || new URL(req.url).origin}/auth/reset-password`
             }
         });
 

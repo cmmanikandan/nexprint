@@ -377,7 +377,7 @@ export default function DashboardLayout({
           <button
             onClick={async () => {
               await supabase.auth.signOut();
-              window.location.href = 'http://localhost:3003/logout';
+              window.location.href = '/';
             }}
             title={sidebarCollapsed ? 'Sign Out' : undefined}
             className={`w-full flex items-center gap-4 px-5 py-3.5 rounded-2xl text-[10px] font-black uppercase tracking-widest text-red-400 hover:bg-red-400/10 transition-all border border-transparent ${sidebarCollapsed ? 'justify-center px-0 w-12 mx-auto' : ''}`}

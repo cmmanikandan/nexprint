@@ -68,6 +68,12 @@ export async function POST(req: Request) {
         // 4. Send Welcome Email (non-blocking — app works even if SMTP not configured)
         try {
             if (process.env.SMTP_HOST && process.env.SMTP_USER) {
+                const siteUrlRaw = process.env.NEXT_PUBLIC_SITE_URL || process.env.VERCEL_URL || '';
+                const siteUrl = siteUrlRaw
+                    ? (siteUrlRaw.startsWith('http') ? siteUrlRaw : `https://${siteUrlRaw}`)
+                    : '';
+                const printShopUrl = process.env.NEXT_PUBLIC_PRINT_SHOP_ADMIN_URL || siteUrl;
+
                 const nodemailer = await import('nodemailer');
                 const transporter = nodemailer.default.createTransport({
                     host: process.env.SMTP_HOST,
@@ -80,8 +86,8 @@ export async function POST(req: Request) {
                 });
 
                 const dashboardUrl = role === 'delivery_partner'
-                    ? 'http://localhost:3003/delivery-hub'
-                    : 'http://localhost:3001';
+                    ? `${siteUrl}/delivery-hub`
+                    : printShopUrl;
 
                 await transporter.sendMail({
                     from: process.env.SMTP_FROM || process.env.SMTP_USER,

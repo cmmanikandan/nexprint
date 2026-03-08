@@ -1,7 +1,5 @@
 import { NextResponse } from 'next/server'
 
-const ADMIN_URL = 'http://localhost:3001';
-
 export async function GET(request: Request) {
     const { searchParams, origin } = new URL(request.url)
     const code = searchParams.get('code')
@@ -35,10 +33,8 @@ export async function GET(request: Request) {
 
                 const role = profile?.role;
 
-                // Admin / Shop roles need session relay to port 3001
-                // We redirect to a client-side relay page that grabs tokens and passes them
+                // Single-domain mode: let callback-client route inside this app.
                 if (role === 'admin' || role === 'shop_owner' || role === 'staff') {
-                    // Go to client relay handler on port 3003, which will do the token handoff
                     return NextResponse.redirect(`${origin}/auth/callback-client?role=${role}`)
                 }
 

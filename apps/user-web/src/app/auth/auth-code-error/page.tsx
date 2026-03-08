@@ -1,11 +1,12 @@
 'use client';
 
+import { Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import { ShieldAlert, ArrowLeft, RefreshCw, MessageSquare } from 'lucide-react';
 
-export default function AuthErrorPage() {
+function AuthErrorContent() {
     const searchParams = useSearchParams();
     const error = searchParams.get('error_description') || searchParams.get('error') || 'Authentication flow interrupted';
 
@@ -53,5 +54,13 @@ export default function AuthErrorPage() {
                 </div>
             </motion.div>
         </div>
+    );
+}
+
+export default function AuthErrorPage() {
+    return (
+        <Suspense fallback={<div className="min-h-screen bg-slate-50 dark:bg-slate-950" />}>
+            <AuthErrorContent />
+        </Suspense>
     );
 }

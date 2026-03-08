@@ -4,6 +4,8 @@ import { useState } from 'react';
 import { X, User, Mail, Phone, Loader2, CheckCircle2, Truck, KeyRound, Eye, EyeOff } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+const USER_WEB_API_BASE = (process.env.NEXT_PUBLIC_USER_WEB_URL || '').replace(/\/$/, '');
+
 interface AddPartnerModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -28,8 +30,7 @@ export default function AddPartnerModal({ isOpen, onClose, onSuccess }: AddPartn
         setError(null);
 
         try {
-            // We call the API on port 3003 (user-web) because it has the service role
-            const res = await fetch('http://localhost:3003/api/auth/create-user', {
+            const res = await fetch(`${USER_WEB_API_BASE}/api/auth/create-user`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

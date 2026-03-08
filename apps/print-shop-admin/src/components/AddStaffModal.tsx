@@ -5,6 +5,8 @@ import { X, User, Mail, Phone, Loader2, CheckCircle2, Shield, KeyRound, Eye, Eye
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
 
+const USER_WEB_API_BASE = (process.env.NEXT_PUBLIC_USER_WEB_URL || '').replace(/\/$/, '');
+
 interface AddStaffModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -51,7 +53,7 @@ export default function AddStaffModal({ isOpen, onClose, onSuccess }: AddStaffMo
         setError(null);
 
         try {
-            const res = await fetch('http://localhost:3003/api/auth/create-user', {
+            const res = await fetch(`${USER_WEB_API_BASE}/api/auth/create-user`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

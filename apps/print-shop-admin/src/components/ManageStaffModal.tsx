@@ -5,6 +5,8 @@ import { X, User, Mail, Phone, Loader2, CheckCircle2, Shield, KeyRound, Eye, Eye
 import { motion, AnimatePresence } from 'framer-motion';
 import { supabase } from '@/lib/supabase';
 
+const USER_WEB_API_BASE = (process.env.NEXT_PUBLIC_USER_WEB_URL || '').replace(/\/$/, '');
+
 interface ManageStaffModalProps {
     isOpen: boolean;
     onClose: () => void;
@@ -52,7 +54,7 @@ export default function ManageStaffModal({ isOpen, onClose, onSuccess, member }:
                 return;
             }
 
-            const res = await fetch('http://localhost:3003/api/auth/manage-user', {
+            const res = await fetch(`${USER_WEB_API_BASE}/api/auth/manage-user`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({

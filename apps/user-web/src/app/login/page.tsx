@@ -9,17 +9,11 @@ import {
 } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 
-const ADMIN_URL = 'http://localhost:3001';
 const RELAY_ROLES = new Set(['admin', 'shop_owner', 'staff']);
 
 async function redirectWithRelay(role: string) {
-    const { data: { session } } = await supabase.auth.getSession();
-    if (!session) throw new Error('Could not retrieve session tokens.');
-    const relay = new URL(`${ADMIN_URL}/auth/relay`);
-    relay.searchParams.set('access_token', session.access_token);
-    relay.searchParams.set('refresh_token', session.refresh_token);
-    relay.searchParams.set('role', role);
-    window.location.href = relay.toString();
+    // Single-domain mode: keep all roles on this deployed app.
+    window.location.href = '/dashboard';
 }
 
 type Mode = 'choose' | 'admin-login' | 'reset-sent';
@@ -105,7 +99,7 @@ export default function LoginPage() {
                 window.location.href = '/dashboard/delivery';
                 return;
             }
-            // Admin / shop — relay to port 3001
+            // Admin / shop / staff in single-domain mode
             if (RELAY_ROLES.has(role)) {
                 await redirectWithRelay(role);
                 return;
