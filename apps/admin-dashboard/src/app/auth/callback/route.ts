@@ -34,13 +34,10 @@ export async function GET(request: Request) {
                 // Port 3002: ONLY super admin
                 if (profile?.role === 'admin') {
                     return NextResponse.redirect(`${origin}/dashboard`)
-                } else if (profile?.role === 'shop_owner') {
-                    // Belongs to shop portal
-                    return NextResponse.redirect('http://localhost:3001/dashboard')
                 } else {
-                    // Everyone else (user, delivery_partner): kicked to user web
+                    // Keep unauthorized users inside this app and show local login error.
                     await supabase.auth.signOut()
-                    return NextResponse.redirect('http://localhost:3003/login?error=unauthorized')
+                    return NextResponse.redirect(`${origin}/?error=unauthorized`)
                 }
             }
         }

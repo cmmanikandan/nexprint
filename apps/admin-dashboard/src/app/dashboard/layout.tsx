@@ -40,12 +40,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
       if (profile?.role !== 'admin') {
         await supabase.auth.signOut();
-        // Shop owner goes to their portal, everyone else to user web
-        if (profile?.role === 'shop_owner') {
-          window.location.href = 'http://localhost:3001';
-        } else {
-          window.location.href = 'http://localhost:3003/login?error=unauthorized';
-        }
+        window.location.href = '/?error=unauthorized';
         return;
       }
     };
@@ -55,7 +50,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    window.location.href = 'http://localhost:3003/login';
+    window.location.href = '/';
   };
   const navItems = [
     { href: '/dashboard', label: 'Home', icon: LayoutGrid },
